@@ -1,3 +1,5 @@
+Clone this repository into `keyboards/bastardkb/charybdis`. Of https://github.com/Bastardkb/bastardkb-qmk/tree/bkb-master repository.
+
 # Charybdis (6x4, 5x3 "Nano")
 
 An ergonomic keyboard with integrated trackball.
