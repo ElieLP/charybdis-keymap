@@ -12,7 +12,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program.  If, see <http://www.gnu.org/licenses/>.
  */
 #include QMK_KEYBOARD_H
 
@@ -22,9 +22,9 @@ const uint16_t PROGMEM combo_paste[] = {KC_C, KC_V, COMBO_END};
 const uint16_t PROGMEM combo_cut[] = {KC_X, KC_V, COMBO_END};
 
 combo_t key_combos[] = {
-    COMBO(combo_copy, C(KC_C)),   // X + C = Copy
-    COMBO(combo_paste, C(KC_V)),  // C + V = Paste
-    COMBO(combo_cut, C(KC_X)),    // X + V = Cut
+    COMBO(combo_copy, C(KC_INS)),   // X + C = Copy (Ctrl+Insert)
+    COMBO(combo_paste, S(KC_INS)),  // C + V = Paste (Shift+Insert)
+    COMBO(combo_cut, S(KC_DEL)),    // X + V = Cut (Shift+Delete)
 };
 
 /* Charybdis-specific features. */
