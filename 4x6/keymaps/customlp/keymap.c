@@ -66,7 +66,7 @@ enum charybdis_keymap_layers {
 // Custom keycodes for dragscroll/sniping tap-hold
 enum custom_keycodes {
     DRG_ESC = SAFE_RANGE,
-    SNP_TAB,
+    SNP_X,
 };
 
 
@@ -80,9 +80,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
         SNIPING,    HM_A,    HM_S,    HM_D,    HM_F,    KC_G,       KC_H,    HM_J,    HM_K,    HM_L, HM_SCLN, KC_QUOT,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       DRGSCRL,    PT_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, PT_SLSH,  KC_ENT,
+       DRGSCRL,    PT_Z,    SNP_X,    KC_C,    KC_V,    KC_B,       KC_N,    KC_M, KC_COMM,  KC_DOT, PT_SLSH,  KC_ENT,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
-                                  DRG_ESC,  NAV_SPC, SNP_TAB,    SYM_ENT, NUM_BSPC,
+                                  DRG_ESC,  NAV_SPC, KC_TAB,    SYM_ENT, NUM_BSPC,
                                            MS_BTN1, KC_LSFT,    FUN_DEL
   //                            ╰───────────────────────────╯ ╰──────────────────╯
   ),
@@ -149,13 +149,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [LAYER_POINTER] = LAYOUT(
   // ╭──────────────────────────────────────────────────────╮ ╭──────────────────────────────────────────────────────╮
-        KC_GRV,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,       KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_MINS,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSPC,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-        SNIPING,    HM_A,    HM_S,    HM_D,    HM_F,    KC_G,    S_D_MOD, DPI_RMOD, DPI_MOD, S_D_RMOD, HM_SCLN, KC_QUOT,
+        SNIPING,  KC_LALT, KC_LGUI, KC_LCTL, KC_LSFT,XXXXXXX,   S_D_MOD, DPI_RMOD, DPI_MOD, S_D_RMOD, XXXXXXX, XXXXXXX,
   // ├──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────┤
-       DRGSCRL,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,       KC_N,  MS_BTN1, MS_BTN3,  MS_BTN2, KC_SLSH, KC_ENT,
+        DRGSCRL,  XXXXXXX, SNIPING,XXXXXXX, XXXXXXX, XXXXXXX,   MS_BTN4, MS_BTN1, MS_BTN3,  MS_BTN2, XXXXXXX, XXXXXXX,
   // ╰──────────────────────────────────────────────────────┤ ├──────────────────────────────────────────────────────╯
                                   KC_ESC,  NAV_SPC,  KC_TAB,    SYM_ENT, NUM_BSPC,
                                            MS_BTN1, KC_LSFT,    FUN_DEL
@@ -212,14 +212,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-        case SNP_TAB:
+        case SNP_X:
             if (record->event.pressed) {
                 snp_tab_timer = timer_read();
                 charybdis_set_pointer_sniping_enabled(true);
             } else {
                 charybdis_set_pointer_sniping_enabled(false);
                 if (timer_elapsed(snp_tab_timer) < TAPPING_TERM) {
-                    tap_code(KC_TAB);
+                    tap_code(KC_X);
                 }
             }
             return false;
