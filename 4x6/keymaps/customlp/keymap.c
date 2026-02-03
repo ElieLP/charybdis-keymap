@@ -16,17 +16,6 @@
  */
 #include QMK_KEYBOARD_H
 
-// Combo definitions
-const uint16_t PROGMEM combo_copy[] = {KC_X, KC_C, COMBO_END};
-const uint16_t PROGMEM combo_paste[] = {KC_C, KC_V, COMBO_END};
-const uint16_t PROGMEM combo_cut[] = {KC_X, KC_V, COMBO_END};
-
-combo_t key_combos[] = {
-    COMBO(combo_copy, C(KC_INS)),   // X + C = Copy (Ctrl+Insert)
-    COMBO(combo_paste, S(KC_INS)),  // C + V = Paste (Shift+Insert)
-    COMBO(combo_cut, S(KC_DEL)),    // X + V = Cut (Shift+Delete)
-};
-
 /* Charybdis-specific features. */
 #define CHARYBDIS_DRAGSCROLL_REVERSE_X
 #define CHARYBDIS_DRAGSCROLL_REVERSE_Y
@@ -69,6 +58,26 @@ enum custom_keycodes {
     SNP_X,
 };
 
+// Combo definitions
+const uint16_t PROGMEM combo_copy[] = {SNP_X, KC_C, COMBO_END};
+const uint16_t PROGMEM combo_paste[] = {KC_C, KC_V, COMBO_END};
+const uint16_t PROGMEM combo_cut[] = {SNP_X, KC_V, COMBO_END};
+
+combo_t key_combos[] = {
+    COMBO(combo_copy, C(KC_INS)),   // X + C = Copy (Ctrl+Insert)
+    COMBO(combo_paste, S(KC_INS)),  // C + V = Paste (Shift+Insert)
+    COMBO(combo_cut, S(KC_DEL)),    // X + V = Cut (Shift+Delete)
+};
+
+// Chordal Hold handedness for split keyboard
+// Left hand: rows 0-4, Right hand: rows 5-9
+// Thumb keys (rows 4 and 9) marked as '*' to allow same-hand chords
+char chordal_hold_handedness(keypos_t key) {
+    if (key.row == 4 || key.row == 9) {
+        return '*';  // Thumb keys exempt from opposite hands rule
+    }
+    return key.row < 5 ? 'L' : 'R';
+}
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {

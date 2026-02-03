@@ -6,3 +6,6 @@
 
 // Combo settings
 #define COMBO_TERM 100  // ms window for combo keys (default 50, increase for easier triggering)
+
+// Home row mods - opposite hands rule to prevent accidental mod activations
+#define CHORDAL_HOLD
